@@ -1,0 +1,32 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Replace broken PDF download with Save as HTML",
+  "requirements": [
+    {
+      "id": "REQ-13",
+      "summary": "Replace the broken PDF download functionality with a client-side HTML export that generates a fully self-contained .html file containing all resume data, inline styles, and base64-encoded profile photo for offline viewing and browser-based printing",
+      "acceptanceCriteria": [
+        "Clicking the download button triggers a browser file download of a file named 'resume.html'.",
+        "The downloaded .html file is fully self-contained — all styles are inlined and the profile photo (if present) is embedded as a base64 data URL, requiring no external resources.",
+        "Opening the downloaded .html file in any modern browser displays the complete, formatted resume matching the live preview layout (header, contact info, photo, all sections).",
+        "The downloaded HTML can be printed or saved as PDF directly from the browser's print dialog without any missing content.",
+        "No blank page or infinite loading state occurs when clicking the download button.",
+        "The old window.print() / html2canvas PDF generation code in useDownloadPDF.ts is removed and replaced with the HTML export logic.",
+        "The download button label is updated to reflect 'Download as HTML' or 'Save as HTML' to set correct user expectations."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useDownloadPDF.ts",
+          "operation": "modify",
+          "description": "Replace the entire PDF generation logic (window.print, html2canvas, DOM cloning with style injection) with HTML export logic. Implement a function that serializes the complete resume data into a self-contained HTML string with all CSS inlined (including theme colors, fonts, layout rules from index.css and Tailwind). Convert any profile photo blob URL to a base64 data URL before embedding. Generate a Blob with type 'text/html', create an object URL, and trigger download via a programmatic anchor click with download='resume.html'. Return a downloadHTML function from the hook."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Update the download button in the header to call the new downloadHTML function from useDownloadPDF instead of the old downloadPDF. Change the button label or aria-label to 'Download as HTML' or 'Save as HTML' to reflect the new functionality and set correct user expectations."
+        }
+      ]
+    }
+  ]
+}

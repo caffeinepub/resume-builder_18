@@ -1,0 +1,40 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-28T15:07:59.681Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 1,
+    "implemented": 1,
+    "items": [
+      {
+        "id": "REQ-13",
+        "summary": "Replace the existing broken PDF download functionality in useDownloadPDF.ts with a 'Save as HTML' download. When the user clicks the download button in the app header, generate a fully self-contained .html file that embeds all resume content (personal info, profile photo as a base64 data URL, education, experience, skills, projects, certifications, LinkedIn, GitHub) along with all necessary inline CSS styles so the file can be opened in any browser and printed or saved as PDF from there. The downloaded file should be named 'resume.html' and triggered via a programmatic anchor click with a blob URL. Remove or replace the old window.print() / html2canvas approach entirely.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useDownloadPDF.ts",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useDownloadPDF.ts",
+          "frontend/src/App.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/hooks/useDownloadPDF.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

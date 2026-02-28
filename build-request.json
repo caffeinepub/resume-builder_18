@@ -1,0 +1,48 @@
+{
+  "kind": "build_request",
+  "title": "Replace broken PDF download with Save as HTML",
+  "projectName": "Resume Builder",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-13",
+      "text": "Replace the existing broken PDF download functionality in useDownloadPDF.ts with a 'Save as HTML' download. When the user clicks the download button in the app header, generate a fully self-contained .html file that embeds all resume content (personal info, profile photo as a base64 data URL, education, experience, skills, projects, certifications, LinkedIn, GitHub) along with all necessary inline CSS styles so the file can be opened in any browser and printed or saved as PDF from there. The downloaded file should be named 'resume.html' and triggered via a programmatic anchor click with a blob URL. Remove or replace the old window.print() / html2canvas approach entirely.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-1",
+          "msg-user-2",
+          "msg-user-3"
+        ],
+        "quotes": [
+          "pdf downloading always failed when i click download it opens a empty page or always loading not opening my saved resume so giive me anither saving method",
+          "okay save as a html"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking the download button triggers a browser file download of a file named 'resume.html'.",
+        "The downloaded .html file is fully self-contained — all styles are inlined and the profile photo (if present) is embedded as a base64 data URL, requiring no external resources.",
+        "Opening the downloaded .html file in any modern browser displays the complete, formatted resume matching the live preview layout (header, contact info, photo, all sections).",
+        "The downloaded HTML can be printed or saved as PDF directly from the browser's print dialog without any missing content.",
+        "No blank page or infinite loading state occurs when clicking the download button.",
+        "The old window.print() / html2canvas PDF generation code in useDownloadPDF.ts is removed and replaced with the HTML export logic.",
+        "The download button label is updated to reflect 'Download as HTML' or 'Save as HTML' to set correct user expectations."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not involve the backend in the HTML generation or download process — this must be entirely client-side.",
+    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "Profile photo blob URLs must be converted to base64 data URLs before embedding in the HTML file so the image is preserved when the file is opened offline."
+  ],
+  "nonGoals": [
+    "PDF generation via html2canvas, jsPDF, or window.print().",
+    "Backend changes of any kind.",
+    "Changes to the resume form, preview panel, or save/load functionality.",
+    "Any new resume sections or visual theme changes."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

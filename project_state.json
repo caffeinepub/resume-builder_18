@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 13,
+  "summary": "A college project resume builder website with a blue-themed welcome screen, form sections for profile photo, personal info, education, work experience, skills, projects, certifications, LinkedIn and GitHub details. Features real-time preview, Save as HTML download (replacing broken PDF), professional blue design theme, and no login/authentication required.",
+  "architectural_notes": [
+    "No login or authentication required — fully open access",
+    "Blue color theme activates after welcome screen — welcome screen uses blue, form/preview also uses blue scheme",
+    "PDF download replaced with Save as HTML — generates self-contained .html file client-side, no backend or html2canvas needed"
+  ],
+  "known_issues": [
+    "Resume saves as empty paper — form data not captured correctly before persisting",
+    "Resume preview details box is empty — form data (name, university, etc.) not rendering in the preview panel despite being entered",
+    "Form input fields show invisible/blank text while typing — text color blends into background despite data being captured correctly"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-a-multi-section-resume-form-with-the-following-sections-profile-photo-upload-personal-info-name-email-phone-address-job-title-summary-education-degree-institution-year-gpa-work-experience-job-title-company-duration-description-skills-list-of-skills-with-proficiency-projects-project-name-description-tech-stack-link-certifications-name-issuer-date-linkedin-url-and-github-url-each-section-should-be-collapsible-expandable-and-allow-adding-multiple-entries-where-applicable-e-g-multiple-education-records-multiple-jobs",
+      "title": "Create a multi-section resume form with the following sections: Profile Photo upload, Personal Info (name, email, phone, address, job title/summary), Education (degree, institution, year, GPA), Work Experience (job title, company, duration, description), Skills (list of skills with proficiency), Projects (project name, description, tech stack, link), Certifications (name, issuer, date), LinkedIn URL, and GitHub URL. Each section should be collapsible/expandable and allow adding multiple entries where applicable (e.g., multiple education records, multiple jobs).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-real-time-resume-preview-panel-that-updates-instantly-as-the-user-fills-in-the-form-the-preview-should-render-a-formatted-print-ready-resume-layout-showing-all-entered-data-including-the-profile-photo-all-sections-and-professional-typography",
+      "title": "Implement a real-time resume preview panel that updates instantly as the user fills in the form. The preview should render a formatted, print-ready resume layout showing all entered data including the profile photo, all sections, and professional typography.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-store-the-resume-form-data-in-the-backend-so-users-can-persist-their-resume-data-across-sessions-without-requiring-login-use-a-randomly-generated-session-token-stored-in-localstorage-to-identify-the-user-s-resume",
+      "title": "Store the resume form data in the backend so users can persist their resume data across sessions without requiring login. Use a randomly generated session token stored in localStorage to identify the user's resume.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-professional-modern-visual-theme-across-the-entire-app-use-a-clean-sophisticated-color-palette-avoid-blue-and-purple-elegant-typography-a-split-panel-layout-form-on-the-left-live-preview-on-the-right-subtle-card-based-sections-smooth-transitions-and-a-polished-overall-aesthetic-suitable-for-a-professional-resume-tool",
+      "title": "Apply a professional, modern visual theme across the entire app. Use a clean, sophisticated color palette (avoid blue and purple), elegant typography, a split-panel layout (form on the left, live preview on the right), subtle card-based sections, smooth transitions, and a polished overall aesthetic suitable for a professional resume tool.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-blue-themed-welcome-landing-screen-as-the-initial-view-of-the-app-it-should-display-a-welcome-to-resume-builder-heading-a-short-tagline-or-subtitle-and-a-prominent-start-building-or-get-started-button-this-screen-should-be-shown-before-the-form-preview-layout-is-rendered",
+      "title": "Add a blue-themed welcome/landing screen as the initial view of the app. It should display a 'Welcome to Resume Builder' heading, a short tagline or subtitle, and a prominent 'Start Building' (or 'Get Started') button. This screen should be shown before the form/preview layout is rendered.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-blue-color-theme-across-the-entire-app-form-panel-preview-panel-header-buttons-accordion-sections-skill-badges-section-headings-once-the-user-has-clicked-start-from-the-welcome-screen-replace-the-existing-warm-slate-charcoal-palette-with-a-professional-blue-palette-using-css-custom-properties-so-that-the-whole-ui-reflects-the-blue-theme-consistently",
+      "title": "Apply a cohesive blue color theme across the entire app (form panel, preview panel, header, buttons, accordion sections, skill badges, section headings) once the user has clicked Start from the welcome screen. Replace the existing warm slate/charcoal palette with a professional blue palette using CSS custom properties so that the whole UI reflects the blue theme consistently.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-empty-resume-save-bug-currently-when-the-user-saves-their-resume-an-empty-blank-resume-is-persisted-instead-of-the-actual-form-data-audit-the-save-flow-in-useresumedata-ts-and-usesaveresume-mutation-to-ensure-the-full-current-form-state-all-fields-personal-info-education-experience-skills-projects-certifications-photo-linkedin-github-is-correctly-read-and-passed-to-the-backend-save-call-before-persisting",
+      "title": "Fix the empty resume save bug. Currently, when the user saves their resume, an empty/blank resume is persisted instead of the actual form data. Audit the save flow in useResumeData.ts and useSaveResume mutation to ensure the full current form state (all fields: personal info, education, experience, skills, projects, certifications, photo, LinkedIn, GitHub) is correctly read and passed to the backend save call before persisting.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-download-as-pdf-button-in-the-app-header-next-to-the-existing-save-button-when-clicked-it-should-generate-a-pdf-from-the-resumepreview-component-s-rendered-html-preserving-the-professional-layout-typography-profile-photo-and-all-section-content-use-a-client-side-pdf-generation-approach-e-g-html2canvas-jspdf-or-browser-print-to-pdf-via-window-print-with-print-specific-css-so-no-backend-involvement-is-needed",
+      "title": "Add a 'Download as PDF' button in the app header (next to the existing Save button). When clicked, it should generate a PDF from the ResumePreview component's rendered HTML, preserving the professional layout, typography, profile photo, and all section content. Use a client-side PDF generation approach (e.g., html2canvas + jsPDF, or browser print-to-PDF via window.print with print-specific CSS) so no backend involvement is needed.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-resume-preview-panel-so-that-all-entered-form-data-name-university-education-job-title-personal-info-skills-work-experience-projects-certifications-linkedin-github-and-profile-photo-is-correctly-rendered-in-the-resumepreview-component-in-real-time-the-preview-details-box-must-not-appear-empty-when-data-has-been-entered-in-the-form-audit-the-data-flow-from-resumeform-through-useresumedata-to-resumepreview-to-ensure-the-resumeformdata-state-is-correctly-passed-as-props-to-resumepreview-and-that-all-fields-are-read-and-displayed",
+      "title": "Fix the resume preview panel so that all entered form data (name, university/education, job title, personal info, skills, work experience, projects, certifications, LinkedIn, GitHub, and profile photo) is correctly rendered in the ResumePreview component in real time. The preview details box must not appear empty when data has been entered in the form. Audit the data flow from ResumeForm through useResumeData to ResumePreview to ensure the ResumeFormData state is correctly passed as props to ResumePreview and that all fields are read and displayed.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-invisible-blank-text-in-all-form-input-fields-textareas-and-select-elements-across-the-resume-form-the-text-color-is-blending-into-the-background-making-typed-content-invisible-even-though-data-is-being-captured-update-all-input-textarea-and-select-elements-in-personalinfosection-educationsection-experiencesection-skillssection-projectssection-certificationssection-and-profilephotosection-to-use-a-clearly-visible-high-contrast-text-color-that-works-against-their-respective-background-colors-in-the-blue-theme",
+      "title": "Fix invisible/blank text in all form input fields, textareas, and select elements across the resume form. The text color is blending into the background, making typed content invisible even though data is being captured. Update all input, textarea, and select elements in PersonalInfoSection, EducationSection, ExperienceSection, SkillsSection, ProjectsSection, CertificationsSection, and ProfilePhotoSection to use a clearly visible, high-contrast text color that works against their respective background colors in the blue theme.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-pdf-download-feature-in-usedownloadpdf-ts-so-that-the-generated-pdf-contains-the-fully-rendered-resume-content-instead-of-an-empty-page-the-current-implementation-uses-window-print-ensure-the-print-stylesheet-in-index-css-correctly-targets-the-resumepreview-component-s-container-and-makes-all-resume-sections-header-contact-info-profile-photo-education-experience-skills-projects-certifications-visible-and-properly-laid-out-during-print-hide-all-non-preview-elements-header-bar-form-panel-welcome-screen-buttons-using-print-specific-css-media-print-so-only-the-resume-preview-is-printed-if-the-current-approach-uses-html2canvas-jspdf-ensure-1-the-resumepreview-dom-node-is-fully-mounted-and-populated-with-form-data-before-capture-begins-2-images-profile-photo-blob-urls-are-loaded-before-the-canvas-snapshot-is-taken-3-correct-cors-usecors-settings-are-applied-to-html2canvas-and-4-the-canvas-dimensions-map-correctly-to-the-pdf-page-size",
+      "title": "Fix the PDF download feature in useDownloadPDF.ts so that the generated PDF contains the fully rendered resume content instead of an empty page. The current implementation uses window.print(); ensure the print stylesheet in index.css correctly targets the ResumePreview component's container and makes all resume sections (header, contact info, profile photo, education, experience, skills, projects, certifications) visible and properly laid out during print. Hide all non-preview elements (header bar, form panel, welcome screen, buttons) using print-specific CSS (@media print) so only the resume preview is printed. If the current approach uses html2canvas + jsPDF, ensure: (1) the ResumePreview DOM node is fully mounted and populated with form data before capture begins, (2) images (profile photo blob URLs) are loaded before the canvas snapshot is taken, (3) correct CORS/useCORS settings are applied to html2canvas, and (4) the canvas dimensions map correctly to the PDF page size.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-broken-pdf-download-functionality-in-usedownloadpdf-ts-with-a-save-as-html-download-when-the-user-clicks-the-download-button-in-the-app-header-generate-a-fully-self-contained-html-file-that-embeds-all-resume-content-personal-info-profile-photo-as-a-base64-data-url-education-experience-skills-projects-certifications-linkedin-github-along-with-all-necessary-inline-css-styles-so-the-file-can-be-opened-in-any-browser-and-printed-or-saved-as-pdf-from-there-the-downloaded-file-should-be-named-resume-html-and-triggered-via-a-programmatic-anchor-click-with-a-blob-url-remove-or-replace-the-old-window-print-html2canvas-approach-entirely",
+      "title": "Replace the existing broken PDF download functionality in useDownloadPDF.ts with a 'Save as HTML' download. When the user clicks the download button in the app header, generate a fully self-contained .html file that embeds all resume content (personal info, profile photo as a base64 data URL, education, experience, skills, projects, certifications, LinkedIn, GitHub) along with all necessary inline CSS styles so the file can be opened in any browser and printed or saved as PDF from there. The downloaded file should be named 'resume.html' and triggered via a programmatic anchor click with a blob URL. Remove or replace the old window.print() / html2canvas approach entirely.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Profile photo upload section",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Personal info section (name, email, phone, address)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Education section",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Work experience section",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Skills section",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Projects section",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Certifications section",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "LinkedIn and GitHub details section",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Real-time resume preview as user fills in details",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Blue-themed welcome/landing screen with 'Welcome to Resume Builder' message and a 'Start' button to begin",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Switch entire app (form + preview) to a cohesive blue color scheme after user clicks Start",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Fix empty resume save bug — ensure all form data is correctly captured and persisted before saving",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Replace broken PDF download with Save as HTML — clicking download generates a self-contained .html file of the resume that can be opened in any browser and printed/saved as PDF",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Resume Builder",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
