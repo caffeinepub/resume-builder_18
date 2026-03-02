@@ -1,7 +1,9 @@
+import React from 'react';
 import type { ResumeFormData, Project } from '@/types/resume';
 
 interface ResumePreviewProps {
   formData: ResumeFormData;
+  previewRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 const SKILL_LEVEL_MAP: Record<string, number> = {
@@ -32,7 +34,43 @@ function SkillBar({ level }: { level: string }) {
   );
 }
 
-export function ResumePreview({ formData }: ResumePreviewProps) {
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      style={{
+        fontSize: '13px',
+        fontWeight: '700',
+        textTransform: 'uppercase',
+        letterSpacing: '0.08em',
+        color: '#1e3a8a',
+        margin: '0 0 8px 0',
+        borderBottom: '2px solid #1e40af',
+        paddingBottom: '3px',
+      }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+function PlaceholderBox({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        color: '#9ca3af',
+        fontStyle: 'italic',
+        border: '1px dashed #d1d5db',
+        padding: '8px',
+        borderRadius: '4px',
+        fontSize: '12px',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function ResumePreview({ formData, previewRef }: ResumePreviewProps) {
   const {
     personalInfo,
     education = [],
@@ -69,6 +107,7 @@ export function ResumePreview({ formData }: ResumePreviewProps) {
   return (
     <div
       id="resume-preview-container"
+      ref={previewRef}
       style={{
         fontFamily: "'Inter', system-ui, sans-serif",
         fontSize: '13px',
@@ -368,41 +407,3 @@ export function ResumePreview({ formData }: ResumePreviewProps) {
     </div>
   );
 }
-
-function SectionHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h2
-      style={{
-        fontSize: '13px',
-        fontWeight: '700',
-        textTransform: 'uppercase',
-        letterSpacing: '0.08em',
-        color: '#1e40af',
-        margin: '0 0 8px 0',
-        borderBottom: '1px solid #bfdbfe',
-        paddingBottom: '3px',
-      }}
-    >
-      {children}
-    </h2>
-  );
-}
-
-function PlaceholderBox({ children }: { children: React.ReactNode }) {
-  return (
-    <div
-      style={{
-        color: '#9ca3af',
-        fontStyle: 'italic',
-        border: '1px dashed #d1d5db',
-        padding: '8px',
-        borderRadius: '4px',
-        fontSize: '12px',
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
-import React from 'react';

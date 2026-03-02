@@ -1,26 +1,49 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T15:07:59.681Z",
+  "generatedAt": "2026-03-02T00:57:28.997Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-13",
-        "summary": "Replace the existing broken PDF download functionality in useDownloadPDF.ts with a 'Save as HTML' download. When the user clicks the download button in the app header, generate a fully self-contained .html file that embeds all resume content (personal info, profile photo as a base64 data URL, education, experience, skills, projects, certifications, LinkedIn, GitHub) along with all necessary inline CSS styles so the file can be opened in any browser and printed or saved as PDF from there. The downloaded file should be named 'resume.html' and triggered via a programmatic anchor click with a blob URL. Remove or replace the old window.print() / html2canvas approach entirely.",
+        "id": "REQ-1",
+        "summary": "Fix text color visibility in the resume preview and form so that all text is clearly legible against its background. Audit all CSS custom properties and inline styles in ResumePreview.tsx, ResumeForm.tsx, and index.css to ensure foreground colors have sufficient contrast against background colors in both light and dark themes.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/hooks/useDownloadPDF.ts",
-          "frontend/src/App.tsx"
+          "frontend/src/index.css",
+          "frontend/src/components/ResumePreview.tsx",
+          "frontend/src/components/ResumeForm.tsx",
+          "frontend/src/components/PersonalInfoSection.tsx",
+          "frontend/src/components/EducationSection.tsx",
+          "frontend/src/components/ExperienceSection.tsx",
+          "frontend/src/components/SkillsSection.tsx",
+          "frontend/src/components/ProjectsSection.tsx",
+          "frontend/src/components/CertificationsSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/hooks/useDownloadPDF.ts",
-          "frontend/src/App.tsx"
+          "frontend/src/index.css",
+          "frontend/src/components/ResumePreview.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Add a 'Download as Image' button to the resume builder UI (in the sticky header alongside the existing Save as HTML button) that captures the rendered resume preview as a PNG image and triggers a browser download. Use html2canvas or a similar DOM-to-canvas approach to capture the ResumePreview component, then convert the canvas to a PNG blob and download it as 'resume.png'. Profile photos must be included in the captured image.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/package.json",
+          "frontend/src/hooks/useDownloadImage.ts",
+          "frontend/src/App.tsx",
+          "frontend/src/components/ResumePreview.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useDownloadImage.ts",
+          "frontend/src/App.tsx",
+          "frontend/src/components/ResumePreview.tsx"
         ]
       }
     ]
@@ -31,7 +54,9 @@
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/src/App.tsx",
-    "frontend/src/hooks/useDownloadPDF.ts",
+    "frontend/src/components/ResumePreview.tsx",
+    "frontend/src/hooks/useDownloadImage.ts",
+    "frontend/src/index.css",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

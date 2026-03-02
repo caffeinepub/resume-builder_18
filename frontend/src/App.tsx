@@ -1,11 +1,22 @@
-import React, { useRef, useState } from 'react';
-import { Save, Download, Loader2, CheckCircle, FileText, Heart } from 'lucide-react';
+import { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ResumeForm } from './components/ResumeForm';
 import { ResumePreview } from './components/ResumePreview';
 import WelcomeScreen from './components/WelcomeScreen';
 import { useResumeData } from './hooks/useResumeData';
 import { useDownloadPDF } from './hooks/useDownloadPDF';
+import { useDownloadImage } from './hooks/useDownloadImage';
+import {
+  Download,
+  FileImage,
+  FileCode2,
+  Loader2,
+  Eye,
+  EyeOff,
+  Save,
+  CheckCircle,
+  Heart,
+} from 'lucide-react';
 
 const WELCOME_KEY = 'resume_builder_started';
 
@@ -15,8 +26,11 @@ export default function App() {
   });
 
   const { resumeData, setResumeData, isSaving, lastSaved, saveNow } = useResumeData();
-  const { downloadHTML, isGenerating } = useDownloadPDF(resumeData);
+  const [showPreview, setShowPreview] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
+
+  const { downloadHTML, isGenerating: isGeneratingHTML } = useDownloadPDF(resumeData);
+  const { downloadImage, isGenerating: isGeneratingImage } = useDownloadImage(previewRef);
 
   const handleStart = () => {
     localStorage.setItem(WELCOME_KEY, 'true');
@@ -35,48 +49,34 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header
-        className="sticky top-0 z-40 no-print"
-        style={{
-          background: 'linear-gradient(90deg, oklch(0.20 0.07 240) 0%, oklch(0.28 0.11 240) 100%)',
-          borderBottom: '1px solid oklch(0.36 0.15 240)',
-        }}
-      >
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <header className="sticky top-0 z-50 bg-card border-b border-border shadow-sm">
+        <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
           {/* Logo + Title */}
           <div className="flex items-center gap-3">
-            <div
-              className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-              style={{ background: 'oklch(0.48 0.18 240)' }}
-            >
-              <img
-                src="/assets/generated/resume-logo.dim_256x256.png"
-                alt="Logo"
-                className="w-6 h-6 object-contain"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-              />
-            </div>
+            <img
+              src="/assets/generated/resume-logo.dim_256x256.png"
+              alt="Resume Builder"
+              className="w-8 h-8 rounded-lg"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
             <div>
-              <h1
-                className="text-base font-bold leading-none"
-                style={{ color: 'oklch(0.97 0.02 240)', fontFamily: "'Playfair Display', serif" }}
-              >
+              <h1 className="text-base font-bold text-foreground leading-tight">
                 Resume Builder
               </h1>
-              <p className="text-xs mt-0.5" style={{ color: 'oklch(0.70 0.08 240)' }}>
+              <p className="text-xs text-muted-foreground hidden sm:block">
                 Professional Resume Creator
               </p>
             </div>
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 flex-wrap justify-end">
             {/* Auto-save status */}
-            <div className="hidden sm:flex items-center gap-1.5 text-xs" style={{ color: 'oklch(0.70 0.08 240)' }}>
+            <div className="hidden sm:flex items-center gap-1.5 text-xs text-muted-foreground">
               {isSaving ? (
                 <>
                   <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -84,23 +84,39 @@ export default function App() {
                 </>
               ) : lastSaved ? (
                 <>
-                  <CheckCircle className="w-3.5 h-3.5" style={{ color: 'oklch(0.62 0.18 240)' }} />
+                  <CheckCircle className="w-3.5 h-3.5 text-green-500" />
                   <span>{formatLastSaved(lastSaved)}</span>
                 </>
               ) : null}
             </div>
 
+            {/* Mobile preview toggle */}
+            <Button
+              variant="outline"
+              size="sm"
+              className="lg:hidden"
+              onClick={() => setShowPreview((v) => !v)}
+            >
+              {showPreview ? (
+                <>
+                  <EyeOff className="w-4 h-4 mr-1" />
+                  Edit
+                </>
+              ) : (
+                <>
+                  <Eye className="w-4 h-4 mr-1" />
+                  Preview
+                </>
+              )}
+            </Button>
+
+            {/* Save */}
             <Button
               variant="outline"
               size="sm"
               onClick={saveNow}
               disabled={isSaving}
-              className="gap-1.5 text-xs font-medium"
-              style={{
-                borderColor: 'oklch(0.48 0.18 240)',
-                color: 'oklch(0.80 0.06 240)',
-                background: 'transparent',
-              }}
+              className="gap-1.5"
             >
               {isSaving ? (
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -110,23 +126,39 @@ export default function App() {
               <span className="hidden sm:inline">Save</span>
             </Button>
 
+            {/* Download as Image */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={downloadImage}
+              disabled={isGeneratingImage}
+              className="gap-1.5"
+            >
+              {isGeneratingImage ? (
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              ) : (
+                <FileImage className="w-3.5 h-3.5" />
+              )}
+              <span className="hidden sm:inline">
+                {isGeneratingImage ? 'Capturing…' : 'Save as Image'}
+              </span>
+            </Button>
+
+            {/* Save as HTML */}
             <Button
               size="sm"
               onClick={downloadHTML}
-              disabled={isGenerating}
-              className="gap-1.5 text-xs font-semibold"
-              style={{
-                background: 'linear-gradient(135deg, oklch(0.52 0.19 240), oklch(0.44 0.18 240))',
-                color: 'oklch(0.97 0.02 240)',
-                border: 'none',
-              }}
+              disabled={isGeneratingHTML}
+              className="gap-1.5"
             >
-              {isGenerating ? (
+              {isGeneratingHTML ? (
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
               ) : (
-                <Download className="w-3.5 h-3.5" />
+                <FileCode2 className="w-3.5 h-3.5" />
               )}
-              <span>Save as HTML</span>
+              <span className="hidden sm:inline">
+                {isGeneratingHTML ? 'Generating…' : 'Save as HTML'}
+              </span>
             </Button>
           </div>
         </div>
@@ -134,97 +166,96 @@ export default function App() {
 
       {/* Main content */}
       <main className="flex-1 max-w-screen-xl mx-auto w-full px-4 sm:px-6 py-6">
-        <div className="flex flex-col lg:flex-row gap-6">
+        <div className="flex gap-6">
           {/* Form panel */}
-          <div className="w-full lg:w-[420px] xl:w-[460px] flex-shrink-0 no-print">
-            <div
-              className="rounded-xl overflow-hidden shadow-card"
-              style={{ border: '1px solid oklch(0.86 0.09 240 / 0.5)' }}
-            >
-              <div
-                className="px-4 py-3 flex items-center gap-2"
-                style={{ background: 'oklch(0.93 0.05 240)', borderBottom: '1px solid oklch(0.86 0.09 240)' }}
-              >
-                <FileText className="w-4 h-4" style={{ color: 'oklch(0.44 0.18 240)' }} />
-                <span className="text-sm font-semibold" style={{ color: 'oklch(0.28 0.11 240)' }}>
-                  Resume Details
-                </span>
-              </div>
-              <div className="bg-card">
-                <ResumeForm
-                  formData={resumeData}
-                  onChange={(updater) => setResumeData(updater)}
-                />
-              </div>
-            </div>
+          <div
+            className={`w-full lg:w-[420px] xl:w-[460px] flex-shrink-0 ${
+              showPreview ? 'hidden lg:block' : 'block'
+            }`}
+          >
+            <ResumeForm
+              formData={resumeData}
+              onChange={(updater) => setResumeData(updater)}
+            />
           </div>
 
           {/* Preview panel */}
-          <div className="flex-1 min-w-0">
-            <div
-              className="rounded-xl overflow-hidden shadow-card"
-              style={{ border: '1px solid oklch(0.86 0.09 240 / 0.5)' }}
-            >
-              <div
-                className="px-4 py-3 flex items-center justify-between no-print"
-                style={{ background: 'oklch(0.93 0.05 240)', borderBottom: '1px solid oklch(0.86 0.09 240)' }}
-              >
-                <span className="text-sm font-semibold" style={{ color: 'oklch(0.28 0.11 240)' }}>
-                  Live Preview
-                </span>
-                <span className="text-xs" style={{ color: 'oklch(0.52 0.06 240)' }}>
-                  Updates as you type
-                </span>
-              </div>
-              <div ref={previewRef} className="overflow-auto">
-                <ResumePreview formData={resumeData} />
+          <div
+            className={`w-full lg:flex-1 min-w-0 ${
+              showPreview ? 'block' : 'hidden lg:block'
+            }`}
+          >
+            <div className="sticky top-20">
+              <div className="bg-muted/30 rounded-xl p-4 border border-border">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm font-semibold text-foreground flex items-center gap-2">
+                    <Eye className="w-4 h-4" />
+                    Live Preview
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    Updates as you type
+                  </span>
+                </div>
+                <div className="overflow-auto rounded-lg shadow-lg bg-white">
+                  <ResumePreview formData={resumeData} previewRef={previewRef} />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </main>
 
-      {/* Mobile Download FAB */}
-      <button
-        onClick={downloadHTML}
-        disabled={isGenerating}
-        className="fixed bottom-6 right-6 z-50 lg:hidden no-print w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
-        style={{
-          background: 'linear-gradient(135deg, oklch(0.52 0.19 240), oklch(0.44 0.18 240))',
-          color: 'oklch(0.97 0.02 240)',
-        }}
-        aria-label="Save as HTML"
-      >
-        {isGenerating ? (
-          <Loader2 className="w-6 h-6 animate-spin" />
-        ) : (
-          <Download className="w-6 h-6" />
-        )}
-      </button>
+      {/* Mobile FABs */}
+      <div className="fixed bottom-6 right-6 flex flex-col gap-2 lg:hidden z-40">
+        <Button
+          size="icon"
+          variant="outline"
+          className="rounded-full shadow-lg w-12 h-12 bg-card"
+          onClick={downloadImage}
+          disabled={isGeneratingImage}
+          title="Save as Image"
+        >
+          {isGeneratingImage ? (
+            <Loader2 className="w-5 h-5 animate-spin" />
+          ) : (
+            <FileImage className="w-5 h-5" />
+          )}
+        </Button>
+        <Button
+          size="icon"
+          className="rounded-full shadow-lg w-12 h-12"
+          onClick={downloadHTML}
+          disabled={isGeneratingHTML}
+          title="Save as HTML"
+        >
+          {isGeneratingHTML ? (
+            <Loader2 className="w-5 h-5 animate-spin" />
+          ) : (
+            <Download className="w-5 h-5" />
+          )}
+        </Button>
+      </div>
 
       {/* Footer */}
-      <footer
-        className="no-print py-4 text-center text-xs"
-        style={{
-          background: 'oklch(0.20 0.07 240)',
-          color: 'oklch(0.60 0.06 240)',
-          borderTop: '1px solid oklch(0.28 0.09 240)',
-        }}
-      >
-        <span>
-          © {new Date().getFullYear()} Resume Builder · Built with{' '}
-          <Heart className="inline w-3 h-3 mx-0.5" style={{ color: 'oklch(0.62 0.18 240)' }} />{' '}
-          using{' '}
-          <a
-            href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname || 'resume-builder')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:opacity-80 transition-opacity"
-            style={{ color: 'oklch(0.70 0.10 240)' }}
-          >
-            caffeine.ai
-          </a>
-        </span>
+      <footer className="border-t border-border bg-card mt-auto">
+        <div className="max-w-screen-xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
+          <span>© {new Date().getFullYear()} Resume Builder. All rights reserved.</span>
+          <span className="flex items-center gap-1">
+            Built with{' '}
+            <Heart className="w-3 h-3 text-red-500 fill-red-500" />{' '}
+            using{' '}
+            <a
+              href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(
+                window.location.hostname || 'resume-builder'
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-foreground transition-colors"
+            >
+              caffeine.ai
+            </a>
+          </span>
+        </div>
       </footer>
     </div>
   );

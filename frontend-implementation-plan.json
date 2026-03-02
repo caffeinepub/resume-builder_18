@@ -1,30 +1,94 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Replace broken PDF download with Save as HTML",
+  "title": "Fix text color visibility and add Download as Image (PNG/JPG) feature",
   "requirements": [
     {
-      "id": "REQ-13",
-      "summary": "Replace the broken PDF download functionality with a client-side HTML export that generates a fully self-contained .html file containing all resume data, inline styles, and base64-encoded profile photo for offline viewing and browser-based printing",
+      "id": "REQ-1",
+      "summary": "Fix text color visibility in the resume preview and form so that all text is clearly legible against its background in both light and dark themes",
       "acceptanceCriteria": [
-        "Clicking the download button triggers a browser file download of a file named 'resume.html'.",
-        "The downloaded .html file is fully self-contained — all styles are inlined and the profile photo (if present) is embedded as a base64 data URL, requiring no external resources.",
-        "Opening the downloaded .html file in any modern browser displays the complete, formatted resume matching the live preview layout (header, contact info, photo, all sections).",
-        "The downloaded HTML can be printed or saved as PDF directly from the browser's print dialog without any missing content.",
-        "No blank page or infinite loading state occurs when clicking the download button.",
-        "The old window.print() / html2canvas PDF generation code in useDownloadPDF.ts is removed and replaced with the HTML export logic.",
-        "The download button label is updated to reflect 'Download as HTML' or 'Save as HTML' to set correct user expectations."
+        "All text in the resume preview is clearly visible and readable against its background",
+        "All form field labels, inputs, and placeholder text are legible against their backgrounds",
+        "No text appears invisible or blends into the background in either light or dark mode"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/useDownloadPDF.ts",
+          "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Replace the entire PDF generation logic (window.print, html2canvas, DOM cloning with style injection) with HTML export logic. Implement a function that serializes the complete resume data into a self-contained HTML string with all CSS inlined (including theme colors, fonts, layout rules from index.css and Tailwind). Convert any profile photo blob URL to a base64 data URL before embedding. Generate a Blob with type 'text/html', create an object URL, and trigger download via a programmatic anchor click with download='resume.html'. Return a downloadHTML function from the hook."
+          "description": "Audit and adjust CSS custom properties for foreground and background colors to ensure sufficient contrast ratios (WCAG AA minimum 4.5:1 for normal text) in both light and dark themes. Review all color token definitions including --foreground, --background, --card-foreground, --primary-foreground, --muted-foreground, and other text-related tokens."
+        },
+        {
+          "path": "frontend/src/components/ResumePreview.tsx",
+          "operation": "modify",
+          "description": "Audit all inline styles and className assignments for text elements to ensure foreground colors contrast sufficiently with their backgrounds. Replace any hardcoded color values that may cause visibility issues with CSS custom properties or Tailwind utility classes that respect the theme. Pay special attention to header text, section titles, body text, and contact information."
+        },
+        {
+          "path": "frontend/src/components/ResumeForm.tsx",
+          "operation": "modify",
+          "description": "Review and fix text color visibility for all form field labels, input placeholders, and helper text. Ensure all text elements use appropriate foreground color tokens that provide sufficient contrast against card and background colors in both themes."
+        },
+        {
+          "path": "frontend/src/components/PersonalInfoSection.tsx",
+          "operation": "modify",
+          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
+        },
+        {
+          "path": "frontend/src/components/EducationSection.tsx",
+          "operation": "modify",
+          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
+        },
+        {
+          "path": "frontend/src/components/ExperienceSection.tsx",
+          "operation": "modify",
+          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
+        },
+        {
+          "path": "frontend/src/components/SkillsSection.tsx",
+          "operation": "modify",
+          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
+        },
+        {
+          "path": "frontend/src/components/ProjectsSection.tsx",
+          "operation": "modify",
+          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
+        },
+        {
+          "path": "frontend/src/components/CertificationsSection.tsx",
+          "operation": "modify",
+          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add a 'Download as Image' button to the resume builder UI that captures the rendered resume preview as a PNG image and triggers a browser download",
+      "acceptanceCriteria": [
+        "A 'Download as Image' button is visible in the header alongside existing action buttons",
+        "Clicking the button captures the full resume preview as a PNG image",
+        "The downloaded file is named 'resume.png'",
+        "The captured image includes the profile photo if one is uploaded",
+        "The download triggers automatically without opening a new tab"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/package.json",
+          "operation": "modify",
+          "description": "Add html2canvas library as a dependency to enable DOM-to-canvas conversion for capturing the resume preview as an image. Use version ^1.4.1 or latest stable."
+        },
+        {
+          "path": "frontend/src/hooks/useDownloadImage.ts",
+          "operation": "create",
+          "description": "Create a custom hook that uses html2canvas to capture the ResumePreview component DOM element as a canvas, convert it to a PNG blob, and trigger a browser download as 'resume.png'. The hook should accept a ref to the preview container element and return a download function. Handle profile photos by ensuring cross-origin images are properly loaded. Include error handling for failed captures."
         },
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Update the download button in the header to call the new downloadHTML function from useDownloadPDF instead of the old downloadPDF. Change the button label or aria-label to 'Download as HTML' or 'Save as HTML' to reflect the new functionality and set correct user expectations."
+          "description": "Add a 'Download as Image' button in the sticky header alongside the existing 'Save as HTML' button. Import and use the new useDownloadImage hook, passing a ref to the ResumePreview container. Wire the button's onClick handler to trigger the image download function. Keep the existing 'Save as HTML' button intact. Ensure the button uses consistent styling with existing action buttons."
+        },
+        {
+          "path": "frontend/src/components/ResumePreview.tsx",
+          "operation": "modify",
+          "description": "Accept and forward a ref prop to the outermost container element of the resume preview to enable html2canvas to target and capture the full rendered preview. Ensure the ref is properly typed as a React.RefObject<HTMLDivElement>."
         }
       ]
     }

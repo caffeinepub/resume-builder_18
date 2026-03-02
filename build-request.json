@@ -1,45 +1,60 @@
 {
   "kind": "build_request",
-  "title": "Replace broken PDF download with Save as HTML",
+  "title": "Fix text color visibility and add Download as Image (PNG/JPG) feature",
   "projectName": "Resume Builder",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-13",
-      "text": "Replace the existing broken PDF download functionality in useDownloadPDF.ts with a 'Save as HTML' download. When the user clicks the download button in the app header, generate a fully self-contained .html file that embeds all resume content (personal info, profile photo as a base64 data URL, education, experience, skills, projects, certifications, LinkedIn, GitHub) along with all necessary inline CSS styles so the file can be opened in any browser and printed or saved as PDF from there. The downloaded file should be named 'resume.html' and triggered via a programmatic anchor click with a blob URL. Remove or replace the old window.print() / html2canvas approach entirely.",
+      "id": "REQ-1",
+      "text": "Fix text color visibility in the resume preview and form so that all text is clearly legible against its background. Audit all CSS custom properties and inline styles in ResumePreview.tsx, ResumeForm.tsx, and index.css to ensure foreground colors have sufficient contrast against background colors in both light and dark themes.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-1",
-          "msg-user-2",
-          "msg-user-3"
+          "msg-1"
         ],
         "quotes": [
-          "pdf downloading always failed when i click download it opens a empty page or always loading not opening my saved resume so giive me anither saving method",
-          "okay save as a html"
+          "the text color are same to the background so change it becoz it shows like invisible text"
         ]
       },
       "acceptanceCriteria": [
-        "Clicking the download button triggers a browser file download of a file named 'resume.html'.",
-        "The downloaded .html file is fully self-contained — all styles are inlined and the profile photo (if present) is embedded as a base64 data URL, requiring no external resources.",
-        "Opening the downloaded .html file in any modern browser displays the complete, formatted resume matching the live preview layout (header, contact info, photo, all sections).",
-        "The downloaded HTML can be printed or saved as PDF directly from the browser's print dialog without any missing content.",
-        "No blank page or infinite loading state occurs when clicking the download button.",
-        "The old window.print() / html2canvas PDF generation code in useDownloadPDF.ts is removed and replaced with the HTML export logic.",
-        "The download button label is updated to reflect 'Download as HTML' or 'Save as HTML' to set correct user expectations."
+        "All text in the resume preview is clearly visible and readable against its background",
+        "All form field labels, inputs, and placeholder text are legible against their backgrounds",
+        "No text appears invisible or blends into the background in either light or dark mode"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add a 'Download as Image' button to the resume builder UI (in the sticky header alongside the existing Save as HTML button) that captures the rendered resume preview as a PNG image and triggers a browser download. Use html2canvas or a similar DOM-to-canvas approach to capture the ResumePreview component, then convert the canvas to a PNG blob and download it as 'resume.png'. Profile photos must be included in the captured image.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2",
+          "msg-3"
+        ],
+        "quotes": [
+          "dont download as word i need as a photo",
+          "Download as Image (PNG/JPG) option that captures the resume as a photo"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A 'Download as Image' button is visible in the header alongside existing action buttons",
+        "Clicking the button captures the full resume preview as a PNG image",
+        "The downloaded file is named 'resume.png'",
+        "The captured image includes the profile photo if one is uploaded",
+        "The download triggers automatically without opening a new tab"
       ]
     }
   ],
   "constraints": [
-    "Do not involve the backend in the HTML generation or download process — this must be entirely client-side.",
-    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
-    "Profile photo blob URLs must be converted to base64 data URLs before embedding in the HTML file so the image is preserved when the file is opened offline."
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
+    "Keep the existing Save as HTML download option intact — do not remove it",
+    "Backend schema and API must not change"
   ],
   "nonGoals": [
-    "PDF generation via html2canvas, jsPDF, or window.print().",
-    "Backend changes of any kind.",
-    "Changes to the resume form, preview panel, or save/load functionality.",
-    "Any new resume sections or visual theme changes."
+    "Download as Word Document (.doc) format",
+    "PDF download functionality",
+    "Changes to backend data model or resume storage logic",
+    "New resume form fields or sections"
   ],
   "imageRequirements": {
     "required": [],
