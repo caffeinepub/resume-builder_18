@@ -45,6 +45,7 @@ export function CertificationsSection({ items, onChange }: Props) {
                 placeholder="e.g. AWS Certified Developer"
                 value={item.name}
                 onChange={(e) => update(index, 'name', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5">
@@ -53,6 +54,7 @@ export function CertificationsSection({ items, onChange }: Props) {
                 placeholder="e.g. Amazon Web Services"
                 value={item.issuer}
                 onChange={(e) => update(index, 'issuer', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5">
@@ -61,6 +63,7 @@ export function CertificationsSection({ items, onChange }: Props) {
                 placeholder="e.g. March 2023"
                 value={item.issueDate}
                 onChange={(e) => update(index, 'issueDate', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5">
@@ -69,6 +72,7 @@ export function CertificationsSection({ items, onChange }: Props) {
                 placeholder="e.g. March 2026 or No Expiry"
                 value={item.expiryDate}
                 onChange={(e) => update(index, 'expiryDate', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
           </div>

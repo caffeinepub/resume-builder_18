@@ -2,10 +2,16 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-change-the-main-app-background-color-to-blue-update-the-css-custom-properties-in-frontend-src-index-css-to-set-the-background-background-to-a-solid-blue-color-e-g-a-mid-range-blue-like-1e40af-or-similar-ensure-this-applies-to-the-overall-page-app-shell",
-      "featureTitle": "Change the main app background color to blue. Update the CSS custom properties in frontend/src/index.css to set the background (--background) to a solid blue color (e.g., a mid-range blue like #1E40AF or similar). Ensure this applies to the overall page/app shell.",
+      "featureId": "feature-fix-all-input-fields-textareas-and-select-elements-across-all-form-section-components-personalinfosection-educationsection-experiencesection-skillssection-projectssection-certificationssection-profilephotosection-so-they-are-always-visually-distinct-and-legible-regardless-of-hover-or-focus-state-each-field-must-have-a-consistently-visible-border-a-non-transparent-background-that-contrasts-with-the-page-background-and-readable-text-color-at-all-times-not-just-on-hover",
+      "featureTitle": "Fix all input fields, textareas, and select elements across all form section components (PersonalInfoSection, EducationSection, ExperienceSection, SkillsSection, ProjectsSection, CertificationsSection, ProfilePhotoSection) so they are always visually distinct and legible regardless of hover or focus state. Each field must have a consistently visible border, a non-transparent background that contrasts with the page background, and readable text color at all times — not just on hover.",
       "files": [
-        "frontend/src/index.css"
+        "frontend/src/components/CertificationsSection.tsx",
+        "frontend/src/components/EducationSection.tsx",
+        "frontend/src/components/ExperienceSection.tsx",
+        "frontend/src/components/PersonalInfoSection.tsx",
+        "frontend/src/components/ProfilePhotoSection.tsx",
+        "frontend/src/components/ProjectsSection.tsx",
+        "frontend/src/components/SkillsSection.tsx"
       ],
       "components": [
         "blob-storage@4.0.0",
@@ -17,27 +23,6 @@
       ],
       "testIds": [
         "REQ-1"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-ensure-all-text-throughout-the-application-is-clearly-visible-against-the-blue-background-audit-and-update-text-color-css-custom-properties-foreground-muted-foreground-card-foreground-etc-in-frontend-src-index-css-and-any-inline-styles-in-components-app-tsx-welcomescreen-tsx-resumeform-tsx-resumepreview-tsx-and-all-section-components-to-use-high-contrast-colors-white-or-very-light-shades-so-no-text-is-invisible-or-hard-to-read-on-the-blue-background",
-      "featureTitle": "Ensure all text throughout the application is clearly visible against the blue background. Audit and update text color CSS custom properties (--foreground, --muted-foreground, --card-foreground, etc.) in frontend/src/index.css and any inline styles in components (App.tsx, WelcomeScreen.tsx, ResumeForm.tsx, ResumePreview.tsx, and all section components) to use high-contrast colors (white or very light shades) so no text is invisible or hard to read on the blue background.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/ResumeForm.tsx",
-        "frontend/src/index.css"
-      ],
-      "components": [
-        "blob-storage@4.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-2"
       ],
       "confidence": "high"
     }

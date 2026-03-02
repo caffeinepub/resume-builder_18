@@ -1,87 +1,54 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix text visibility with blue background",
+  "title": "Fix invisible input fields and form elements",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Change the main app background color to blue",
+      "summary": "Fix all input fields, textareas, and select elements across all form section components so they are always visually distinct and legible regardless of hover or focus state",
       "acceptanceCriteria": [
-        "The main application background is visibly blue",
-        "The blue background is consistent across all sections of the app"
+        "All input fields, textareas, and selects display a visible border at rest (no hover required)",
+        "All input fields, textareas, and selects have a non-transparent background color that contrasts with the surrounding page background",
+        "Text entered in any field is readable without hovering",
+        "Placeholder text is visible at rest",
+        "Hover and focus states may add additional styling (e.g., highlight ring) but the field must remain visible when neither hovered nor focused",
+        "The fix applies consistently across all form sections and both light and dark theme color tokens defined in index.css"
       ],
       "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Update the --background CSS custom property in both light and dark theme sections to use a solid blue color (e.g., #1E40AF or similar mid-range blue). This will apply the blue background to the overall page/app shell consistently across all sections."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Ensure all text is clearly visible against the blue background",
-      "acceptanceCriteria": [
-        "All heading, body, label, placeholder, and button text is clearly readable against the blue background",
-        "No text disappears or blends into the background in any section of the app",
-        "Form field text and labels inside the resume form are fully visible",
-        "The resume preview section maintains its own legible text styling"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Update text color CSS custom properties (--foreground, --muted-foreground, --card-foreground, --popover-foreground, --primary-foreground, --secondary-foreground, --accent-foreground, --destructive-foreground) in both light and dark theme sections to use high-contrast colors (white or very light shades like #F8FAFC or #E2E8F0) to ensure all text is clearly visible against the blue background."
-        },
-        {
-          "path": "frontend/src/components/WelcomeScreen.tsx",
-          "operation": "modify",
-          "description": "Audit and update any inline styles or className color utilities to ensure heading, body text, and button text remain clearly visible against the blue background. Replace any dark text colors with light/white variants."
-        },
-        {
-          "path": "frontend/src/components/ResumeForm.tsx",
-          "operation": "modify",
-          "description": "Review and update any inline styles or className color utilities to ensure all form labels, input text, placeholders, and accordion titles are clearly visible against the blue background. Replace any dark text colors with light/white variants."
-        },
         {
           "path": "frontend/src/components/PersonalInfoSection.tsx",
           "operation": "modify",
-          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+          "description": "Update all Input and Textarea components to include visible border and non-transparent background colors at rest. Apply border classes (e.g., border border-border) and background classes (e.g., bg-card or bg-background) to ensure visibility without hover. Ensure text color contrasts properly using text-foreground or similar tokens. Remove or adjust any hover-only visibility logic."
         },
         {
           "path": "frontend/src/components/EducationSection.tsx",
           "operation": "modify",
-          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+          "description": "Update all Input components to include visible border and non-transparent background colors at rest. Apply border classes (e.g., border border-border) and background classes (e.g., bg-card or bg-background) to ensure visibility without hover. Ensure text color contrasts properly using text-foreground or similar tokens. Remove or adjust any hover-only visibility logic."
         },
         {
           "path": "frontend/src/components/ExperienceSection.tsx",
           "operation": "modify",
-          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+          "description": "Update all Input and Textarea components to include visible border and non-transparent background colors at rest. Apply border classes (e.g., border border-border) and background classes (e.g., bg-card or bg-background) to ensure visibility without hover. Ensure text color contrasts properly using text-foreground or similar tokens. Remove or adjust any hover-only visibility logic."
         },
         {
           "path": "frontend/src/components/SkillsSection.tsx",
           "operation": "modify",
-          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+          "description": "Update all Input and Select components to include visible border and non-transparent background colors at rest. Apply border classes (e.g., border border-border) and background classes (e.g., bg-card or bg-background) to ensure visibility without hover. Ensure text color contrasts properly using text-foreground or similar tokens. Remove or adjust any hover-only visibility logic."
         },
         {
           "path": "frontend/src/components/ProjectsSection.tsx",
           "operation": "modify",
-          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+          "description": "Update all Input and Textarea components to include visible border and non-transparent background colors at rest. Apply border classes (e.g., border border-border) and background classes (e.g., bg-card or bg-background) to ensure visibility without hover. Ensure text color contrasts properly using text-foreground or similar tokens. Remove or adjust any hover-only visibility logic."
         },
         {
           "path": "frontend/src/components/CertificationsSection.tsx",
           "operation": "modify",
-          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+          "description": "Update all Input components to include visible border and non-transparent background colors at rest. Apply border classes (e.g., border border-border) and background classes (e.g., bg-card or bg-background) to ensure visibility without hover. Ensure text color contrasts properly using text-foreground or similar tokens. Remove or adjust any hover-only visibility logic."
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/components/ProfilePhotoSection.tsx",
           "operation": "modify",
-          "description": "Review and update any inline styles or className color utilities in the header section (containing Save, Download buttons) and mobile toggle controls to ensure all button text and icons remain clearly visible against the blue background. Replace any dark text colors with light/white variants. Ensure the form/preview layout background does not interfere with text visibility."
-        },
-        {
-          "path": "frontend/src/components/ResumePreview.tsx",
-          "operation": "modify",
-          "description": "Verify that the resume preview card maintains its own clean, print-friendly appearance with dark text on a white/light preview card background. The preview should remain visually distinct from the blue app shell background. No changes should be made to the preview card's internal text colors or background; only ensure the card itself is properly styled to stand out from the blue outer background."
+          "description": "Update the file input element to include visible border and non-transparent background colors at rest. Apply border classes (e.g., border border-border) and background classes (e.g., bg-card or bg-background) to ensure visibility without hover. Ensure text color contrasts properly using text-foreground or similar tokens. Remove or adjust any hover-only visibility logic."
         }
       ]
     }

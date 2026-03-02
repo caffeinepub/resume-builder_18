@@ -1,33 +1,25 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Resume builder app with blue background and visible text styling.",
+  "summary": "Resume builder app with styled section titles (glowing blue effect). Input fields/form elements have a visibility issue where they only appear on hover and turn invisible otherwise.",
   "architectural_notes": [],
   "known_issues": [
-    "Text visibility issues on colored backgrounds require explicit contrast handling"
+    "Input fields and form elements are only visible on hover; they appear invisible/blank when not hovered due to CSS styling issues (border/background/text color blending into background)"
   ],
   "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-change-the-main-app-background-color-to-blue-update-the-css-custom-properties-in-frontend-src-index-css-to-set-the-background-background-to-a-solid-blue-color-e-g-a-mid-range-blue-like-1e40af-or-similar-ensure-this-applies-to-the-overall-page-app-shell",
-      "title": "Change the main app background color to blue. Update the CSS custom properties in frontend/src/index.css to set the background (--background) to a solid blue color (e.g., a mid-range blue like #1E40AF or similar). Ensure this applies to the overall page/app shell.",
+      "id": "feature-fix-all-input-fields-textareas-and-select-elements-across-all-form-section-components-personalinfosection-educationsection-experiencesection-skillssection-projectssection-certificationssection-profilephotosection-so-they-are-always-visually-distinct-and-legible-regardless-of-hover-or-focus-state-each-field-must-have-a-consistently-visible-border-a-non-transparent-background-that-contrasts-with-the-page-background-and-readable-text-color-at-all-times-not-just-on-hover",
+      "title": "Fix all input fields, textareas, and select elements across all form section components (PersonalInfoSection, EducationSection, ExperienceSection, SkillsSection, ProjectsSection, CertificationsSection, ProfilePhotoSection) so they are always visually distinct and legible regardless of hover or focus state. Each field must have a consistently visible border, a non-transparent background that contrasts with the page background, and readable text color at all times — not just on hover.",
       "reqIds": [
         "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-all-text-throughout-the-application-is-clearly-visible-against-the-blue-background-audit-and-update-text-color-css-custom-properties-foreground-muted-foreground-card-foreground-etc-in-frontend-src-index-css-and-any-inline-styles-in-components-app-tsx-welcomescreen-tsx-resumeform-tsx-resumepreview-tsx-and-all-section-components-to-use-high-contrast-colors-white-or-very-light-shades-so-no-text-is-invisible-or-hard-to-read-on-the-blue-background",
-      "title": "Ensure all text throughout the application is clearly visible against the blue background. Audit and update text color CSS custom properties (--foreground, --muted-foreground, --card-foreground, etc.) in frontend/src/index.css and any inline styles in components (App.tsx, WelcomeScreen.tsx, ResumeForm.tsx, ResumePreview.tsx, and all section components) to use high-contrast colors (white or very light shades) so no text is invisible or hard to read on the blue background.",
-      "reqIds": [
-        "REQ-2"
       ],
       "version": 1
     }
   ],
   "new_feature_requests": [],
   "gameProjectType": "none",
-  "projectName": "Fix text visibility with blue background",
+  "projectName": "Resume Builder",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

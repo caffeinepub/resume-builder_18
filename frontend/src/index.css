@@ -31,8 +31,8 @@
     --destructive:   oklch(0.55 0.22 25);
     --destructive-foreground: oklch(0.98 0.005 25);
 
-    --border:        oklch(0.82 0.02 240);
-    --input:         oklch(0.82 0.02 240);
+    --border:        oklch(0.70 0.04 240);
+    --input:         oklch(0.70 0.04 240);
     --ring:          oklch(0.55 0.18 240);
 
     --success:       oklch(0.55 0.15 145);
@@ -66,8 +66,8 @@
     --destructive:   oklch(0.55 0.22 25);
     --destructive-foreground: oklch(0.98 0.005 25);
 
-    --border:        oklch(0.30 0.04 240);
-    --input:         oklch(0.30 0.04 240);
+    --border:        oklch(0.42 0.06 240);
+    --input:         oklch(0.42 0.06 240);
     --ring:          oklch(0.65 0.15 240);
 
     --success:       oklch(0.60 0.15 145);
@@ -96,31 +96,64 @@
     color: oklch(0.15 0.03 240) !important;
   }
 
-  /* Force legible text in all inputs, textareas, selects */
-  input,
+  /* Force legible text in all inputs, textareas, selects — always visible */
+  input:not([type="file"]),
   textarea,
   select {
-    color: oklch(0.15 0.03 240) !important;
+    color: oklch(0.12 0.03 240) !important;
     background-color: oklch(1.00 0.000 0) !important;
+    border-color: oklch(0.60 0.06 240) !important;
+    border-width: 1.5px !important;
+    border-style: solid !important;
   }
 
-  .dark input,
+  input:not([type="file"]):focus,
+  textarea:focus,
+  select:focus {
+    border-color: oklch(0.45 0.18 240) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px oklch(0.55 0.18 240 / 0.25) !important;
+  }
+
+  input:not([type="file"]):hover,
+  textarea:hover,
+  select:hover {
+    border-color: oklch(0.45 0.12 240) !important;
+  }
+
+  .dark input:not([type="file"]),
   .dark textarea,
   .dark select {
     color: oklch(0.93 0.010 240) !important;
-    background-color: oklch(0.22 0.025 240) !important;
+    background-color: oklch(0.26 0.04 240) !important;
+    border-color: oklch(0.45 0.08 240) !important;
+    border-width: 1.5px !important;
+    border-style: solid !important;
+  }
+
+  .dark input:not([type="file"]):focus,
+  .dark textarea:focus,
+  .dark select:focus {
+    border-color: oklch(0.65 0.15 240) !important;
+    box-shadow: 0 0 0 2px oklch(0.65 0.15 240 / 0.25) !important;
+  }
+
+  .dark input:not([type="file"]):hover,
+  .dark textarea:hover,
+  .dark select:hover {
+    border-color: oklch(0.55 0.10 240) !important;
   }
 
   /* Placeholder text */
   input::placeholder,
   textarea::placeholder {
-    color: oklch(0.55 0.02 240) !important;
+    color: oklch(0.52 0.04 240) !important;
     opacity: 1;
   }
 
   .dark input::placeholder,
   .dark textarea::placeholder {
-    color: oklch(0.55 0.03 240) !important;
+    color: oklch(0.58 0.04 240) !important;
     opacity: 1;
   }
 
@@ -128,6 +161,28 @@
   .bg-card label,
   [class*="bg-card"] label {
     color: oklch(0.15 0.03 240) !important;
+  }
+
+  /* SelectTrigger button visibility fix */
+  [data-radix-select-trigger],
+  button[role="combobox"] {
+    background-color: oklch(1.00 0.000 0) !important;
+    border-color: oklch(0.60 0.06 240) !important;
+    border-width: 1.5px !important;
+    border-style: solid !important;
+    color: oklch(0.12 0.03 240) !important;
+  }
+
+  [data-radix-select-trigger]:hover,
+  button[role="combobox"]:hover {
+    border-color: oklch(0.45 0.12 240) !important;
+  }
+
+  .dark [data-radix-select-trigger],
+  .dark button[role="combobox"] {
+    background-color: oklch(0.26 0.04 240) !important;
+    border-color: oklch(0.45 0.08 240) !important;
+    color: oklch(0.93 0.010 240) !important;
   }
 }
 
@@ -140,6 +195,15 @@
   .card-shadow-lg {
     box-shadow: 0 4px 16px oklch(0.15 0.02 240 / 0.14),
                 0 12px 40px oklch(0.15 0.02 240 / 0.10);
+  }
+
+  /* Glowing blue text effect for section titles */
+  .text-glow-blue {
+    color: oklch(0.38 0.20 240) !important;
+    text-shadow:
+      0 0 6px oklch(0.60 0.22 240 / 0.70),
+      0 0 14px oklch(0.55 0.22 240 / 0.50),
+      0 0 28px oklch(0.50 0.20 240 / 0.30);
   }
 }
 

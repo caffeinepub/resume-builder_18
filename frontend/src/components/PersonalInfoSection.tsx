@@ -25,6 +25,7 @@ export function PersonalInfoSection({ data, onChange }: Props) {
             placeholder="e.g. Jane Smith"
             value={data.name ?? ''}
             onChange={(e) => update('name', e.target.value)}
+            className="border border-border bg-white text-gray-900"
           />
         </div>
         <div className="space-y-1.5">
@@ -34,6 +35,7 @@ export function PersonalInfoSection({ data, onChange }: Props) {
             placeholder="e.g. Software Engineer"
             value={data.jobTitle ?? ''}
             onChange={(e) => update('jobTitle', e.target.value)}
+            className="border border-border bg-white text-gray-900"
           />
         </div>
         <div className="space-y-1.5">
@@ -44,6 +46,7 @@ export function PersonalInfoSection({ data, onChange }: Props) {
             placeholder="jane@example.com"
             value={data.email ?? ''}
             onChange={(e) => update('email', e.target.value)}
+            className="border border-border bg-white text-gray-900"
           />
         </div>
         <div className="space-y-1.5">
@@ -53,6 +56,7 @@ export function PersonalInfoSection({ data, onChange }: Props) {
             placeholder="+1 (555) 000-0000"
             value={data.phone ?? ''}
             onChange={(e) => update('phone', e.target.value)}
+            className="border border-border bg-white text-gray-900"
           />
         </div>
         <div className="space-y-1.5 sm:col-span-2">
@@ -62,6 +66,7 @@ export function PersonalInfoSection({ data, onChange }: Props) {
             placeholder="City, State, Country"
             value={data.address ?? ''}
             onChange={(e) => update('address', e.target.value)}
+            className="border border-border bg-white text-gray-900"
           />
         </div>
       </div>
@@ -74,7 +79,7 @@ export function PersonalInfoSection({ data, onChange }: Props) {
           rows={3}
           value={data.summary ?? ''}
           onChange={(e) => update('summary', e.target.value)}
-          className="resize-none"
+          className="resize-none border border-border bg-white text-gray-900"
         />
       </div>
 
@@ -89,6 +94,7 @@ export function PersonalInfoSection({ data, onChange }: Props) {
             placeholder="https://linkedin.com/in/username"
             value={data.linkedin ?? ''}
             onChange={(e) => update('linkedin', e.target.value)}
+            className="border border-border bg-white text-gray-900"
           />
         </div>
         <div className="space-y-1.5">
@@ -101,6 +107,7 @@ export function PersonalInfoSection({ data, onChange }: Props) {
             placeholder="https://github.com/username"
             value={data.github ?? ''}
             onChange={(e) => update('github', e.target.value)}
+            className="border border-border bg-white text-gray-900"
           />
         </div>
       </div>

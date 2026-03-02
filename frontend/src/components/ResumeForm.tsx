@@ -15,7 +15,7 @@ interface Props {
   onChange: (updater: (prev: ResumeFormData) => ResumeFormData) => void;
 }
 
-const sectionTitleStyle = { color: 'oklch(0.15 0.03 240)' };
+const iconStyle = { color: 'oklch(0.45 0.18 240)' };
 
 export function ResumeForm({ formData, onChange }: Props) {
   const [openSections, setOpenSections] = useState<string[]>(['personal']);
@@ -40,8 +40,8 @@ export function ResumeForm({ formData, onChange }: Props) {
         {/* Personal Info */}
         <AccordionItem value="personal" className="bg-card rounded-xl border border-border shadow-card overflow-hidden">
           <AccordionTrigger className="px-5 py-4 hover:no-underline hover:bg-secondary/40 transition-colors">
-            <span className="flex items-center gap-2.5 font-semibold text-sm" style={sectionTitleStyle}>
-              <User className="w-4 h-4" style={{ color: 'oklch(0.45 0.18 240)' }} />
+            <span className="flex items-center gap-2.5 font-semibold text-sm text-glow-blue">
+              <User className="w-4 h-4" style={iconStyle} />
               Personal Info
             </span>
           </AccordionTrigger>
@@ -56,8 +56,8 @@ export function ResumeForm({ formData, onChange }: Props) {
         {/* Education */}
         <AccordionItem value="education" className="bg-card rounded-xl border border-border shadow-card overflow-hidden">
           <AccordionTrigger className="px-5 py-4 hover:no-underline hover:bg-secondary/40 transition-colors">
-            <span className="flex items-center gap-2.5 font-semibold text-sm" style={sectionTitleStyle}>
-              <GraduationCap className="w-4 h-4" style={{ color: 'oklch(0.45 0.18 240)' }} />
+            <span className="flex items-center gap-2.5 font-semibold text-sm text-glow-blue">
+              <GraduationCap className="w-4 h-4" style={iconStyle} />
               Education
             </span>
           </AccordionTrigger>
@@ -72,8 +72,8 @@ export function ResumeForm({ formData, onChange }: Props) {
         {/* Work Experience */}
         <AccordionItem value="experience" className="bg-card rounded-xl border border-border shadow-card overflow-hidden">
           <AccordionTrigger className="px-5 py-4 hover:no-underline hover:bg-secondary/40 transition-colors">
-            <span className="flex items-center gap-2.5 font-semibold text-sm" style={sectionTitleStyle}>
-              <Briefcase className="w-4 h-4" style={{ color: 'oklch(0.45 0.18 240)' }} />
+            <span className="flex items-center gap-2.5 font-semibold text-sm text-glow-blue">
+              <Briefcase className="w-4 h-4" style={iconStyle} />
               Work Experience
             </span>
           </AccordionTrigger>
@@ -88,8 +88,8 @@ export function ResumeForm({ formData, onChange }: Props) {
         {/* Skills */}
         <AccordionItem value="skills" className="bg-card rounded-xl border border-border shadow-card overflow-hidden">
           <AccordionTrigger className="px-5 py-4 hover:no-underline hover:bg-secondary/40 transition-colors">
-            <span className="flex items-center gap-2.5 font-semibold text-sm" style={sectionTitleStyle}>
-              <Wrench className="w-4 h-4" style={{ color: 'oklch(0.45 0.18 240)' }} />
+            <span className="flex items-center gap-2.5 font-semibold text-sm text-glow-blue">
+              <Wrench className="w-4 h-4" style={iconStyle} />
               Skills
             </span>
           </AccordionTrigger>
@@ -104,8 +104,8 @@ export function ResumeForm({ formData, onChange }: Props) {
         {/* Projects */}
         <AccordionItem value="projects" className="bg-card rounded-xl border border-border shadow-card overflow-hidden">
           <AccordionTrigger className="px-5 py-4 hover:no-underline hover:bg-secondary/40 transition-colors">
-            <span className="flex items-center gap-2.5 font-semibold text-sm" style={sectionTitleStyle}>
-              <FolderOpen className="w-4 h-4" style={{ color: 'oklch(0.45 0.18 240)' }} />
+            <span className="flex items-center gap-2.5 font-semibold text-sm text-glow-blue">
+              <FolderOpen className="w-4 h-4" style={iconStyle} />
               Projects
             </span>
           </AccordionTrigger>
@@ -120,8 +120,8 @@ export function ResumeForm({ formData, onChange }: Props) {
         {/* Certifications */}
         <AccordionItem value="certifications" className="bg-card rounded-xl border border-border shadow-card overflow-hidden">
           <AccordionTrigger className="px-5 py-4 hover:no-underline hover:bg-secondary/40 transition-colors">
-            <span className="flex items-center gap-2.5 font-semibold text-sm" style={sectionTitleStyle}>
-              <Award className="w-4 h-4" style={{ color: 'oklch(0.45 0.18 240)' }} />
+            <span className="flex items-center gap-2.5 font-semibold text-sm text-glow-blue">
+              <Award className="w-4 h-4" style={iconStyle} />
               Certifications
             </span>
           </AccordionTrigger>

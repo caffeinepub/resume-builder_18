@@ -46,6 +46,7 @@ export function ExperienceSection({ items, onChange }: Props) {
                 placeholder="e.g. Software Engineer"
                 value={item.jobTitle}
                 onChange={(e) => update(index, 'jobTitle', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5">
@@ -54,6 +55,7 @@ export function ExperienceSection({ items, onChange }: Props) {
                 placeholder="e.g. Google"
                 value={item.company}
                 onChange={(e) => update(index, 'company', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5">
@@ -62,6 +64,7 @@ export function ExperienceSection({ items, onChange }: Props) {
                 placeholder="e.g. Jan 2022"
                 value={item.startDate}
                 onChange={(e) => update(index, 'startDate', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5">
@@ -70,6 +73,7 @@ export function ExperienceSection({ items, onChange }: Props) {
                 placeholder="e.g. Dec 2023 or Present"
                 value={item.endDate}
                 onChange={(e) => update(index, 'endDate', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
           </div>
@@ -80,7 +84,7 @@ export function ExperienceSection({ items, onChange }: Props) {
               rows={3}
               value={item.description}
               onChange={(e) => update(index, 'description', e.target.value)}
-              className="resize-none"
+              className="resize-none border border-border bg-white text-gray-900"
             />
           </div>
         </div>

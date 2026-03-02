@@ -73,7 +73,7 @@ export function ProfilePhotoSection({ photoUrl, onChange }: Props) {
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium">Profile Photo</p>
+        <p className="text-sm font-medium text-card-foreground">Profile Photo</p>
         <p className="text-xs text-muted-foreground">Upload a professional headshot (JPG, PNG, WebP)</p>
         <Button
           type="button"

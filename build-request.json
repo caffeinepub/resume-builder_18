@@ -1,54 +1,41 @@
 {
   "kind": "build_request",
-  "title": "Fix text visibility with blue background",
+  "title": "Fix invisible input fields and form elements",
   "priority": "high",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Change the main app background color to blue. Update the CSS custom properties in frontend/src/index.css to set the background (--background) to a solid blue color (e.g., a mid-range blue like #1E40AF or similar). Ensure this applies to the overall page/app shell.",
+      "text": "Fix all input fields, textareas, and select elements across all form section components (PersonalInfoSection, EducationSection, ExperienceSection, SkillsSection, ProjectsSection, CertificationsSection, ProfilePhotoSection) so they are always visually distinct and legible regardless of hover or focus state. Each field must have a consistently visible border, a non-transparent background that contrasts with the page background, and readable text color at all times — not just on hover.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-3",
+          "msg-4",
+          "msg-5"
         ],
         "quotes": [
-          "again the text are invisible change the background as blue"
+          "when i get my mouse arrow to the box it is visible when i move from it its again invisible",
+          "The input fields are only visible on hover (when your mouse is over them) and turn invisible when you move away"
         ]
       },
       "acceptanceCriteria": [
-        "The main application background is visibly blue",
-        "The blue background is consistent across all sections of the app"
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Ensure all text throughout the application is clearly visible against the blue background. Audit and update text color CSS custom properties (--foreground, --muted-foreground, --card-foreground, etc.) in frontend/src/index.css and any inline styles in components (App.tsx, WelcomeScreen.tsx, ResumeForm.tsx, ResumePreview.tsx, and all section components) to use high-contrast colors (white or very light shades) so no text is invisible or hard to read on the blue background.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "again the text are invisible",
-          "change the background as blue"
-        ]
-      },
-      "acceptanceCriteria": [
-        "All heading, body, label, placeholder, and button text is clearly readable against the blue background",
-        "No text disappears or blends into the background in any section of the app",
-        "Form field text and labels inside the resume form are fully visible",
-        "The resume preview section maintains its own legible text styling"
+        "All input fields, textareas, and selects display a visible border at rest (no hover required)",
+        "All input fields, textareas, and selects have a non-transparent background color that contrasts with the surrounding page background",
+        "Text entered in any field is readable without hovering",
+        "Placeholder text is visible at rest",
+        "Hover and focus states may add additional styling (e.g., highlight ring) but the field must remain visible when neither hovered nor focused",
+        "The fix applies consistently across all form sections and both light and dark theme color tokens defined in index.css"
       ]
     }
   ],
   "constraints": [
-    "Do not edit any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
-    "The resume preview (ResumePreview.tsx) should retain a clean, print-friendly appearance with dark text on a white/light preview card background — only the outer app shell background should be blue"
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
+    "Preserve the existing glowing blue section title effect defined in frontend/src/index.css"
   ],
   "nonGoals": [
-    "Changing the resume preview card background color",
-    "Adding dark mode toggling",
-    "Modifying backend logic or data schema"
+    "Redesigning the overall layout or color theme",
+    "Adding new form fields or resume sections",
+    "Changing backend data models or storage logic"
   ],
   "imageRequirements": {
     "required": [],

@@ -46,6 +46,7 @@ export function ProjectsSection({ items, onChange }: Props) {
                 placeholder="e.g. Portfolio Website"
                 value={item.name}
                 onChange={(e) => update(index, 'name', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5">
@@ -54,6 +55,7 @@ export function ProjectsSection({ items, onChange }: Props) {
                 placeholder="e.g. React, Node.js, MongoDB"
                 value={item.techStack}
                 onChange={(e) => update(index, 'techStack', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5 sm:col-span-2">
@@ -62,6 +64,7 @@ export function ProjectsSection({ items, onChange }: Props) {
                 placeholder="https://github.com/username/project"
                 value={item.link}
                 onChange={(e) => update(index, 'link', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
           </div>
@@ -72,7 +75,7 @@ export function ProjectsSection({ items, onChange }: Props) {
               rows={2}
               value={item.description}
               onChange={(e) => update(index, 'description', e.target.value)}
-              className="resize-none"
+              className="resize-none border border-border bg-white text-gray-900"
             />
           </div>
         </div>

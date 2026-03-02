@@ -45,6 +45,7 @@ export function EducationSection({ items, onChange }: Props) {
                 placeholder="e.g. Bachelor of Science"
                 value={item.degree}
                 onChange={(e) => update(index, 'degree', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5">
@@ -53,6 +54,7 @@ export function EducationSection({ items, onChange }: Props) {
                 placeholder="e.g. Computer Science"
                 value={item.major}
                 onChange={(e) => update(index, 'major', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5">
@@ -61,6 +63,7 @@ export function EducationSection({ items, onChange }: Props) {
                 placeholder="e.g. MIT"
                 value={item.institution}
                 onChange={(e) => update(index, 'institution', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
             <div className="space-y-1.5">
@@ -69,6 +72,7 @@ export function EducationSection({ items, onChange }: Props) {
                 placeholder="e.g. 2024"
                 value={item.graduationYear}
                 onChange={(e) => update(index, 'graduationYear', e.target.value)}
+                className="border border-border bg-white text-gray-900"
               />
             </div>
           </div>

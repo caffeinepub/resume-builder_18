@@ -40,9 +40,10 @@ export function SkillsSection({ items, onChange }: Props) {
             placeholder="e.g. React, Python, Figma"
             value={item.name}
             onChange={(e) => update(index, 'name', e.target.value)}
+            className="border border-border bg-white text-gray-900"
           />
           <Select value={item.level} onValueChange={(v) => update(index, 'level', v)}>
-            <SelectTrigger className="w-32">
+            <SelectTrigger className="w-32 border border-border bg-white text-gray-900">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

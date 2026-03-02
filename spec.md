@@ -1,12 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Fix text visibility by changing the app background to blue and ensuring all text is clearly readable throughout the application.
+**Goal:** Fix invisible input fields and form elements across all resume form sections so they are always visually distinct and legible at rest, without requiring hover or focus.
 
 **Planned changes:**
-- Update the `--background` CSS custom property in `index.css` to a solid blue color (e.g., `#1E40AF`)
-- Update foreground/text CSS custom properties (`--foreground`, `--muted-foreground`, `--card-foreground`, etc.) to white or light shades for high contrast against the blue background
-- Audit and fix any inline text color styles in `App.tsx`, `WelcomeScreen.tsx`, `ResumeForm.tsx`, `ResumePreview.tsx`, and section components to ensure visibility on the blue background
-- Keep the resume preview card's inner background white/light with dark text for a clean, print-friendly appearance
+- Update all input fields, textareas, and select elements in PersonalInfoSection, EducationSection, ExperienceSection, SkillsSection, ProjectsSection, CertificationsSection, and ProfilePhotoSection to have a consistently visible border at rest
+- Set a non-transparent background color on all form fields that contrasts with the page background
+- Ensure text and placeholder text are readable without hovering
+- Apply fixes consistently for both light and dark theme color tokens
 
-**User-visible outcome:** The app shell displays a blue background with all text (headings, labels, form fields, buttons, placeholders) clearly visible, while the resume preview card retains its clean, legible white appearance.
+**User-visible outcome:** All form fields are clearly visible and legible at all times — users no longer need to hover over fields to see them.
