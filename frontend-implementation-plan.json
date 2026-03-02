@@ -1,94 +1,87 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix text color visibility and add Download as Image (PNG/JPG) feature",
+  "title": "Fix text visibility with blue background",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Fix text color visibility in the resume preview and form so that all text is clearly legible against its background in both light and dark themes",
+      "summary": "Change the main app background color to blue",
       "acceptanceCriteria": [
-        "All text in the resume preview is clearly visible and readable against its background",
-        "All form field labels, inputs, and placeholder text are legible against their backgrounds",
-        "No text appears invisible or blends into the background in either light or dark mode"
+        "The main application background is visibly blue",
+        "The blue background is consistent across all sections of the app"
       ],
       "file_operations": [
         {
           "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Audit and adjust CSS custom properties for foreground and background colors to ensure sufficient contrast ratios (WCAG AA minimum 4.5:1 for normal text) in both light and dark themes. Review all color token definitions including --foreground, --background, --card-foreground, --primary-foreground, --muted-foreground, and other text-related tokens."
-        },
-        {
-          "path": "frontend/src/components/ResumePreview.tsx",
-          "operation": "modify",
-          "description": "Audit all inline styles and className assignments for text elements to ensure foreground colors contrast sufficiently with their backgrounds. Replace any hardcoded color values that may cause visibility issues with CSS custom properties or Tailwind utility classes that respect the theme. Pay special attention to header text, section titles, body text, and contact information."
-        },
-        {
-          "path": "frontend/src/components/ResumeForm.tsx",
-          "operation": "modify",
-          "description": "Review and fix text color visibility for all form field labels, input placeholders, and helper text. Ensure all text elements use appropriate foreground color tokens that provide sufficient contrast against card and background colors in both themes."
-        },
-        {
-          "path": "frontend/src/components/PersonalInfoSection.tsx",
-          "operation": "modify",
-          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
-        },
-        {
-          "path": "frontend/src/components/EducationSection.tsx",
-          "operation": "modify",
-          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
-        },
-        {
-          "path": "frontend/src/components/ExperienceSection.tsx",
-          "operation": "modify",
-          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
-        },
-        {
-          "path": "frontend/src/components/SkillsSection.tsx",
-          "operation": "modify",
-          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
-        },
-        {
-          "path": "frontend/src/components/ProjectsSection.tsx",
-          "operation": "modify",
-          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
-        },
-        {
-          "path": "frontend/src/components/CertificationsSection.tsx",
-          "operation": "modify",
-          "description": "Audit label and input text colors to ensure they are legible against form backgrounds. Replace any problematic color assignments with theme-aware tokens."
+          "description": "Update the --background CSS custom property in both light and dark theme sections to use a solid blue color (e.g., #1E40AF or similar mid-range blue). This will apply the blue background to the overall page/app shell consistently across all sections."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Add a 'Download as Image' button to the resume builder UI that captures the rendered resume preview as a PNG image and triggers a browser download",
+      "summary": "Ensure all text is clearly visible against the blue background",
       "acceptanceCriteria": [
-        "A 'Download as Image' button is visible in the header alongside existing action buttons",
-        "Clicking the button captures the full resume preview as a PNG image",
-        "The downloaded file is named 'resume.png'",
-        "The captured image includes the profile photo if one is uploaded",
-        "The download triggers automatically without opening a new tab"
+        "All heading, body, label, placeholder, and button text is clearly readable against the blue background",
+        "No text disappears or blends into the background in any section of the app",
+        "Form field text and labels inside the resume form are fully visible",
+        "The resume preview section maintains its own legible text styling"
       ],
       "file_operations": [
         {
-          "path": "frontend/package.json",
+          "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Add html2canvas library as a dependency to enable DOM-to-canvas conversion for capturing the resume preview as an image. Use version ^1.4.1 or latest stable."
+          "description": "Update text color CSS custom properties (--foreground, --muted-foreground, --card-foreground, --popover-foreground, --primary-foreground, --secondary-foreground, --accent-foreground, --destructive-foreground) in both light and dark theme sections to use high-contrast colors (white or very light shades like #F8FAFC or #E2E8F0) to ensure all text is clearly visible against the blue background."
         },
         {
-          "path": "frontend/src/hooks/useDownloadImage.ts",
-          "operation": "create",
-          "description": "Create a custom hook that uses html2canvas to capture the ResumePreview component DOM element as a canvas, convert it to a PNG blob, and trigger a browser download as 'resume.png'. The hook should accept a ref to the preview container element and return a download function. Handle profile photos by ensuring cross-origin images are properly loaded. Include error handling for failed captures."
+          "path": "frontend/src/components/WelcomeScreen.tsx",
+          "operation": "modify",
+          "description": "Audit and update any inline styles or className color utilities to ensure heading, body text, and button text remain clearly visible against the blue background. Replace any dark text colors with light/white variants."
+        },
+        {
+          "path": "frontend/src/components/ResumeForm.tsx",
+          "operation": "modify",
+          "description": "Review and update any inline styles or className color utilities to ensure all form labels, input text, placeholders, and accordion titles are clearly visible against the blue background. Replace any dark text colors with light/white variants."
+        },
+        {
+          "path": "frontend/src/components/PersonalInfoSection.tsx",
+          "operation": "modify",
+          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+        },
+        {
+          "path": "frontend/src/components/EducationSection.tsx",
+          "operation": "modify",
+          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+        },
+        {
+          "path": "frontend/src/components/ExperienceSection.tsx",
+          "operation": "modify",
+          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+        },
+        {
+          "path": "frontend/src/components/SkillsSection.tsx",
+          "operation": "modify",
+          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+        },
+        {
+          "path": "frontend/src/components/ProjectsSection.tsx",
+          "operation": "modify",
+          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
+        },
+        {
+          "path": "frontend/src/components/CertificationsSection.tsx",
+          "operation": "modify",
+          "description": "Audit and update any inline styles or className color utilities to ensure all label and input text is clearly visible against the blue background. Replace any dark text colors with light/white variants."
         },
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Add a 'Download as Image' button in the sticky header alongside the existing 'Save as HTML' button. Import and use the new useDownloadImage hook, passing a ref to the ResumePreview container. Wire the button's onClick handler to trigger the image download function. Keep the existing 'Save as HTML' button intact. Ensure the button uses consistent styling with existing action buttons."
+          "description": "Review and update any inline styles or className color utilities in the header section (containing Save, Download buttons) and mobile toggle controls to ensure all button text and icons remain clearly visible against the blue background. Replace any dark text colors with light/white variants. Ensure the form/preview layout background does not interfere with text visibility."
         },
         {
           "path": "frontend/src/components/ResumePreview.tsx",
           "operation": "modify",
-          "description": "Accept and forward a ref prop to the outermost container element of the resume preview to enable html2canvas to target and capture the full rendered preview. Ensure the ref is properly typed as a React.RefObject<HTMLDivElement>."
+          "description": "Verify that the resume preview card maintains its own clean, print-friendly appearance with dark text on a white/light preview card background. The preview should remain visually distinct from the blue app shell background. No changes should be made to the preview card's internal text colors or background; only ensure the card itself is properly styled to stand out from the blue outer background."
         }
       ]
     }

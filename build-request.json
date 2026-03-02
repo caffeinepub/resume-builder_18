@@ -1,60 +1,54 @@
 {
   "kind": "build_request",
-  "title": "Fix text color visibility and add Download as Image (PNG/JPG) feature",
-  "projectName": "Resume Builder",
-  "priority": "normal",
+  "title": "Fix text visibility with blue background",
+  "priority": "high",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Fix text color visibility in the resume preview and form so that all text is clearly legible against its background. Audit all CSS custom properties and inline styles in ResumePreview.tsx, ResumeForm.tsx, and index.css to ensure foreground colors have sufficient contrast against background colors in both light and dark themes.",
+      "text": "Change the main app background color to blue. Update the CSS custom properties in frontend/src/index.css to set the background (--background) to a solid blue color (e.g., a mid-range blue like #1E40AF or similar). Ensure this applies to the overall page/app shell.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-4"
         ],
         "quotes": [
-          "the text color are same to the background so change it becoz it shows like invisible text"
+          "again the text are invisible change the background as blue"
         ]
       },
       "acceptanceCriteria": [
-        "All text in the resume preview is clearly visible and readable against its background",
-        "All form field labels, inputs, and placeholder text are legible against their backgrounds",
-        "No text appears invisible or blends into the background in either light or dark mode"
+        "The main application background is visibly blue",
+        "The blue background is consistent across all sections of the app"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Add a 'Download as Image' button to the resume builder UI (in the sticky header alongside the existing Save as HTML button) that captures the rendered resume preview as a PNG image and triggers a browser download. Use html2canvas or a similar DOM-to-canvas approach to capture the ResumePreview component, then convert the canvas to a PNG blob and download it as 'resume.png'. Profile photos must be included in the captured image.",
+      "text": "Ensure all text throughout the application is clearly visible against the blue background. Audit and update text color CSS custom properties (--foreground, --muted-foreground, --card-foreground, etc.) in frontend/src/index.css and any inline styles in components (App.tsx, WelcomeScreen.tsx, ResumeForm.tsx, ResumePreview.tsx, and all section components) to use high-contrast colors (white or very light shades) so no text is invisible or hard to read on the blue background.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-2",
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "dont download as word i need as a photo",
-          "Download as Image (PNG/JPG) option that captures the resume as a photo"
+          "again the text are invisible",
+          "change the background as blue"
         ]
       },
       "acceptanceCriteria": [
-        "A 'Download as Image' button is visible in the header alongside existing action buttons",
-        "Clicking the button captures the full resume preview as a PNG image",
-        "The downloaded file is named 'resume.png'",
-        "The captured image includes the profile photo if one is uploaded",
-        "The download triggers automatically without opening a new tab"
+        "All heading, body, label, placeholder, and button text is clearly readable against the blue background",
+        "No text disappears or blends into the background in any section of the app",
+        "Form field text and labels inside the resume form are fully visible",
+        "The resume preview section maintains its own legible text styling"
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
-    "Keep the existing Save as HTML download option intact — do not remove it",
-    "Backend schema and API must not change"
+    "Do not edit any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
+    "The resume preview (ResumePreview.tsx) should retain a clean, print-friendly appearance with dark text on a white/light preview card background — only the outer app shell background should be blue"
   ],
   "nonGoals": [
-    "Download as Word Document (.doc) format",
-    "PDF download functionality",
-    "Changes to backend data model or resume storage logic",
-    "New resume form fields or sections"
+    "Changing the resume preview card background color",
+    "Adding dark mode toggling",
+    "Modifying backend logic or data schema"
   ],
   "imageRequirements": {
     "required": [],

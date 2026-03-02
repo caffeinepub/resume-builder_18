@@ -64,10 +64,10 @@ export default function App() {
               }}
             />
             <div>
-              <h1 className="text-base font-bold text-foreground leading-tight">
+              <h1 className="text-base font-bold leading-tight" style={{ color: 'oklch(0.15 0.03 240)' }}>
                 Resume Builder
               </h1>
-              <p className="text-xs text-muted-foreground hidden sm:block">
+              <p className="text-xs hidden sm:block" style={{ color: 'oklch(0.45 0.04 240)' }}>
                 Professional Resume Creator
               </p>
             </div>
@@ -76,7 +76,7 @@ export default function App() {
           {/* Actions */}
           <div className="flex items-center gap-2 flex-wrap justify-end">
             {/* Auto-save status */}
-            <div className="hidden sm:flex items-center gap-1.5 text-xs text-muted-foreground">
+            <div className="hidden sm:flex items-center gap-1.5 text-xs" style={{ color: 'oklch(0.45 0.04 240)' }}>
               {isSaving ? (
                 <>
                   <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -84,7 +84,7 @@ export default function App() {
                 </>
               ) : lastSaved ? (
                 <>
-                  <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                  <CheckCircle className="w-3.5 h-3.5 text-green-600" />
                   <span>{formatLastSaved(lastSaved)}</span>
                 </>
               ) : null}
@@ -186,13 +186,22 @@ export default function App() {
             }`}
           >
             <div className="sticky top-20">
-              <div className="bg-muted/30 rounded-xl p-4 border border-border">
+              <div
+                className="rounded-xl p-4 border"
+                style={{
+                  background: 'oklch(0.26 0.10 240 / 0.5)',
+                  borderColor: 'oklch(0.50 0.14 240 / 0.4)',
+                }}
+              >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-semibold text-foreground flex items-center gap-2">
+                  <span
+                    className="text-sm font-semibold flex items-center gap-2"
+                    style={{ color: 'oklch(0.95 0.01 240)' }}
+                  >
                     <Eye className="w-4 h-4" />
                     Live Preview
                   </span>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs" style={{ color: 'oklch(0.78 0.06 240)' }}>
                     Updates as you type
                   </span>
                 </div>
@@ -237,12 +246,18 @@ export default function App() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-card mt-auto">
-        <div className="max-w-screen-xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
+      <footer
+        className="border-t mt-auto"
+        style={{
+          background: 'oklch(0.24 0.10 240)',
+          borderColor: 'oklch(0.42 0.12 240 / 0.5)',
+        }}
+      >
+        <div className="max-w-screen-xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs" style={{ color: 'oklch(0.78 0.06 240)' }}>
           <span>© {new Date().getFullYear()} Resume Builder. All rights reserved.</span>
           <span className="flex items-center gap-1">
             Built with{' '}
-            <Heart className="w-3 h-3 text-red-500 fill-red-500" />{' '}
+            <Heart className="w-3 h-3 fill-current" style={{ color: 'oklch(0.70 0.18 25)' }} />{' '}
             using{' '}
             <a
               href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(
@@ -250,7 +265,8 @@ export default function App() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-foreground transition-colors"
+              className="underline transition-colors"
+              style={{ color: 'oklch(0.85 0.08 240)' }}
             >
               caffeine.ai
             </a>

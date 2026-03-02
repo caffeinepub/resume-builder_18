@@ -2,10 +2,9 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-fix-text-color-visibility-in-the-resume-preview-and-form-so-that-all-text-is-clearly-legible-against-its-background-audit-all-css-custom-properties-and-inline-styles-in-resumepreview-tsx-resumeform-tsx-and-index-css-to-ensure-foreground-colors-have-sufficient-contrast-against-background-colors-in-both-light-and-dark-themes",
-      "featureTitle": "Fix text color visibility in the resume preview and form so that all text is clearly legible against its background. Audit all CSS custom properties and inline styles in ResumePreview.tsx, ResumeForm.tsx, and index.css to ensure foreground colors have sufficient contrast against background colors in both light and dark themes.",
+      "featureId": "feature-change-the-main-app-background-color-to-blue-update-the-css-custom-properties-in-frontend-src-index-css-to-set-the-background-background-to-a-solid-blue-color-e-g-a-mid-range-blue-like-1e40af-or-similar-ensure-this-applies-to-the-overall-page-app-shell",
+      "featureTitle": "Change the main app background color to blue. Update the CSS custom properties in frontend/src/index.css to set the background (--background) to a solid blue color (e.g., a mid-range blue like #1E40AF or similar). Ensure this applies to the overall page/app shell.",
       "files": [
-        "frontend/src/components/ResumePreview.tsx",
         "frontend/src/index.css"
       ],
       "components": [
@@ -22,12 +21,12 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-a-download-as-image-button-to-the-resume-builder-ui-in-the-sticky-header-alongside-the-existing-save-as-html-button-that-captures-the-rendered-resume-preview-as-a-png-image-and-triggers-a-browser-download-use-html2canvas-or-a-similar-dom-to-canvas-approach-to-capture-the-resumepreview-component-then-convert-the-canvas-to-a-png-blob-and-download-it-as-resume-png-profile-photos-must-be-included-in-the-captured-image",
-      "featureTitle": "Add a 'Download as Image' button to the resume builder UI (in the sticky header alongside the existing Save as HTML button) that captures the rendered resume preview as a PNG image and triggers a browser download. Use html2canvas or a similar DOM-to-canvas approach to capture the ResumePreview component, then convert the canvas to a PNG blob and download it as 'resume.png'. Profile photos must be included in the captured image.",
+      "featureId": "feature-ensure-all-text-throughout-the-application-is-clearly-visible-against-the-blue-background-audit-and-update-text-color-css-custom-properties-foreground-muted-foreground-card-foreground-etc-in-frontend-src-index-css-and-any-inline-styles-in-components-app-tsx-welcomescreen-tsx-resumeform-tsx-resumepreview-tsx-and-all-section-components-to-use-high-contrast-colors-white-or-very-light-shades-so-no-text-is-invisible-or-hard-to-read-on-the-blue-background",
+      "featureTitle": "Ensure all text throughout the application is clearly visible against the blue background. Audit and update text color CSS custom properties (--foreground, --muted-foreground, --card-foreground, etc.) in frontend/src/index.css and any inline styles in components (App.tsx, WelcomeScreen.tsx, ResumeForm.tsx, ResumePreview.tsx, and all section components) to use high-contrast colors (white or very light shades) so no text is invisible or hard to read on the blue background.",
       "files": [
         "frontend/src/App.tsx",
-        "frontend/src/components/ResumePreview.tsx",
-        "frontend/src/hooks/useDownloadImage.ts"
+        "frontend/src/components/ResumeForm.tsx",
+        "frontend/src/index.css"
       ],
       "components": [
         "blob-storage@4.0.0",

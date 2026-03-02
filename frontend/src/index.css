@@ -6,34 +6,34 @@
 
 @layer base {
   :root {
-    /* Light mode — professional blue palette */
-    --background:    oklch(0.97 0.005 240);
-    --foreground:    oklch(0.15 0.02 240);
+    /* Blue background theme */
+    --background:    oklch(0.32 0.12 240);
+    --foreground:    oklch(0.97 0.01 240);
 
-    --card:          oklch(1.00 0.000 0);
-    --card-foreground: oklch(0.15 0.02 240);
+    --card:          oklch(0.98 0.005 240);
+    --card-foreground: oklch(0.15 0.03 240);
 
-    --popover:       oklch(1.00 0.000 0);
-    --popover-foreground: oklch(0.15 0.02 240);
+    --popover:       oklch(0.98 0.005 240);
+    --popover-foreground: oklch(0.15 0.03 240);
 
-    --primary:       oklch(0.38 0.12 240);
+    --primary:       oklch(0.45 0.18 240);
     --primary-foreground: oklch(0.98 0.005 240);
 
-    --secondary:     oklch(0.92 0.015 240);
-    --secondary-foreground: oklch(0.20 0.04 240);
+    --secondary:     oklch(0.88 0.02 240);
+    --secondary-foreground: oklch(0.20 0.05 240);
 
-    --muted:         oklch(0.93 0.010 240);
-    --muted-foreground: oklch(0.45 0.03 240);
+    --muted:         oklch(0.90 0.015 240);
+    --muted-foreground: oklch(0.42 0.04 240);
 
-    --accent:        oklch(0.90 0.025 240);
-    --accent-foreground: oklch(0.20 0.04 240);
+    --accent:        oklch(0.55 0.18 240);
+    --accent-foreground: oklch(0.98 0.005 240);
 
     --destructive:   oklch(0.55 0.22 25);
     --destructive-foreground: oklch(0.98 0.005 25);
 
-    --border:        oklch(0.85 0.015 240);
-    --input:         oklch(0.85 0.015 240);
-    --ring:          oklch(0.38 0.12 240);
+    --border:        oklch(0.82 0.02 240);
+    --input:         oklch(0.82 0.02 240);
+    --ring:          oklch(0.55 0.18 240);
 
     --success:       oklch(0.55 0.15 145);
     --warning:       oklch(0.70 0.18 75);
@@ -42,8 +42,8 @@
   }
 
   .dark {
-    --background:    oklch(0.14 0.02 240);
-    --foreground:    oklch(0.93 0.010 240);
+    --background:    oklch(0.22 0.10 240);
+    --foreground:    oklch(0.95 0.01 240);
 
     --card:          oklch(0.18 0.025 240);
     --card-foreground: oklch(0.93 0.010 240);
@@ -51,24 +51,24 @@
     --popover:       oklch(0.18 0.025 240);
     --popover-foreground: oklch(0.93 0.010 240);
 
-    --primary:       oklch(0.65 0.12 240);
+    --primary:       oklch(0.65 0.15 240);
     --primary-foreground: oklch(0.10 0.02 240);
 
-    --secondary:     oklch(0.25 0.03 240);
+    --secondary:     oklch(0.28 0.04 240);
     --secondary-foreground: oklch(0.90 0.010 240);
 
-    --muted:         oklch(0.22 0.025 240);
-    --muted-foreground: oklch(0.65 0.03 240);
+    --muted:         oklch(0.25 0.03 240);
+    --muted-foreground: oklch(0.68 0.04 240);
 
-    --accent:        oklch(0.28 0.04 240);
-    --accent-foreground: oklch(0.90 0.010 240);
+    --accent:        oklch(0.55 0.15 240);
+    --accent-foreground: oklch(0.98 0.005 240);
 
     --destructive:   oklch(0.55 0.22 25);
     --destructive-foreground: oklch(0.98 0.005 25);
 
-    --border:        oklch(0.28 0.03 240);
-    --input:         oklch(0.28 0.03 240);
-    --ring:          oklch(0.65 0.12 240);
+    --border:        oklch(0.30 0.04 240);
+    --input:         oklch(0.30 0.04 240);
+    --ring:          oklch(0.65 0.15 240);
 
     --success:       oklch(0.60 0.15 145);
     --warning:       oklch(0.72 0.18 75);
@@ -93,14 +93,14 @@
 
   /* Ensure all form labels are always visible */
   label {
-    @apply text-foreground;
+    color: oklch(0.15 0.03 240) !important;
   }
 
   /* Force legible text in all inputs, textareas, selects */
   input,
   textarea,
   select {
-    color: oklch(0.15 0.02 240) !important;
+    color: oklch(0.15 0.03 240) !important;
     background-color: oklch(1.00 0.000 0) !important;
   }
 
@@ -123,17 +123,23 @@
     color: oklch(0.55 0.03 240) !important;
     opacity: 1;
   }
+
+  /* Ensure card text is always dark (readable on white card bg) */
+  .bg-card label,
+  [class*="bg-card"] label {
+    color: oklch(0.15 0.03 240) !important;
+  }
 }
 
 @layer utilities {
   .card-shadow {
-    box-shadow: 0 1px 3px oklch(0.15 0.02 240 / 0.08),
-                0 4px 12px oklch(0.15 0.02 240 / 0.06);
+    box-shadow: 0 1px 3px oklch(0.15 0.02 240 / 0.12),
+                0 4px 12px oklch(0.15 0.02 240 / 0.10);
   }
 
   .card-shadow-lg {
-    box-shadow: 0 4px 16px oklch(0.15 0.02 240 / 0.10),
-                0 12px 40px oklch(0.15 0.02 240 / 0.08);
+    box-shadow: 0 4px 16px oklch(0.15 0.02 240 / 0.14),
+                0 12px 40px oklch(0.15 0.02 240 / 0.10);
   }
 }
 
